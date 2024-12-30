@@ -1,0 +1,5 @@
+rootProject.name = 'social-media-project'
+
+include 'framework'
+include 'source-user-authentication-service'
+

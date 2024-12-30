@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpaPluginProjectSettings">
+    <option name="entityNameTemplate" />
+    <option name="tableNameTemplate" />
+    <option name="columnNameTemplate" />
+    <option name="generateSerialVersionUID" value="true" />
+    <option name="isLombokGetterAndSetter" value="false" />
+    <option name="scaffoldingLanguage" value="Java" />
+  </component>
+  <component name="ReverseEngineeringSettings">
+    <database-infos>
+      <database-info dbms-id="postgres">
+        <mapping-types>
+          <mapping-type sql-type="character varying[]" java-class="java.util.List" />
+        </mapping-types>
+      </database-info>
+    </database-infos>
+  </component>
+</project>
