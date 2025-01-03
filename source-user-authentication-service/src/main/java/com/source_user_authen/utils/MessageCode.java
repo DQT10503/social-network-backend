@@ -6,8 +6,7 @@ public class MessageCode {
     }
 
     public static final String ERR_01001 = "ERR_01001";
-    public static final String ERR_01002 = "ERR_01002";
-    public static final String ERR_01003 = "ERR_01003";
-    public static final String ERR_01004 = "ERR_01004";
-    public static final String ERR_01005 = "ERR_01005";
+    public static final String ERR_DATE = "ERR_DATE";
+    public static final String DUPLICATE = "DUPLICATE";
+    public static final String ERR_STATUS = "ERR_STATUS";
 }

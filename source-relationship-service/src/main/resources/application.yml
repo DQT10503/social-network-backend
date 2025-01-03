@@ -1,22 +1,13 @@
 server:
   servlet:
     context-path: /api/base
-  port: 6789
-
-keycloak:
-  realm: SocialMediaRealm
-  auth-server-url: http://localhost:8080/realms/social-media-realm
-  ssl-required: external
-  resource: my-app
-  use-resource-role-mappings: true
-  bearer-only: true
-  public-client: true
+  port: 6788
 
 spring:
   main:
     allow-bean-definition-overriding: true #cho phép việc ghi đè (overriding) các bean trong ứng dụng
   application:
-    name: user-authen-service
+    name: relationship-service
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
@@ -27,7 +18,7 @@ spring:
     password: postgres
     driver-class-name: org.postgresql.Driver
     hikari:
-      pool-name: user-authen-service
+      pool-name: relationship-service
       connection-timeout: 30000 #thời gian tối đa (tính = millisecond) mà client đợi để kết nối
       minimum-idle: 2 #số kết nối tối thiểu mà pool luôn giữ trong trạng thái rảnh (idle)
       maximum-pool-size: 20 #số lượng tối đa mà pool có thể quản lý

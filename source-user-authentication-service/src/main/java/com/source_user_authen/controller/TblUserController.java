@@ -34,7 +34,7 @@ public class TblUserController {
     public ResponseEntity<PagingResponse> search(TblUserRequest request, PagingRequest pagingRequest) {
         String masterAccount = BearerContextHolder.getContext().getMasterAccount();
         logger.info("{} [Filter] {}", masterAccount, request);
-        Pageable pageRequest = PageRequest.of(pagingRequest.getLimit(), pagingRequest.getOffset(), pagingRequest.getSort(Sort.by(Sort.Direction.ASC, "full_name")));
+        Pageable pageRequest = PageRequest.of(pagingRequest.getOffset(), pagingRequest.getLimit(), pagingRequest.getSort(Sort.by(Sort.Direction.ASC, "full_name")));
         return ResponseEntity.ok(userService.search(request, pageRequest));
     }
 

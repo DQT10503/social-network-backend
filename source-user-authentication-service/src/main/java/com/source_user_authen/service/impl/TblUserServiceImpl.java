@@ -59,7 +59,7 @@ public class TblUserServiceImpl implements TblUserService {
     public TblUserResponse insert(TblUserCreateRequest request) {
         TblUser existsUser = userRepository.findByEmailAndStatus(request.getEmail(), CommonStatus.ACTIVE);
         if (Objects.nonNull(existsUser)) {
-            throw new BusinessException(MessageCode.ERR_01003, messageUtil.getMessage(MessageCode.ERR_01003), "Email: " + request.getEmail() + ", Status: " + CommonStatus.ACTIVE);
+            throw new BusinessException(MessageCode.DUPLICATE, messageUtil.getMessage(MessageCode.DUPLICATE), "Email: " + request.getEmail() + ", Status: " + CommonStatus.ACTIVE);
         }
         TblUser user = Utilities.copyProperties(request, TblUser.class);
         user.setStatus(CommonStatus.ACTIVE);
@@ -80,7 +80,7 @@ public class TblUserServiceImpl implements TblUserService {
     public DeleteMethodResponse delete(Long id) {
         TblUser user = getUserById(id);
         if (!CommonStatus.INACTIVE.equals(user.getStatus())) {
-            throw new BusinessException(MessageCode.ERR_01004, messageUtil.getMessage(MessageCode.ERR_01004), "Status: " + user.getStatus());
+            throw new BusinessException(MessageCode.ERR_STATUS, messageUtil.getMessage(MessageCode.ERR_STATUS), "Status: " + user.getStatus());
         }
         userRepository.delete(user);
         DeleteMethodResponse response = new DeleteMethodResponse();
@@ -102,10 +102,10 @@ public class TblUserServiceImpl implements TblUserService {
     private void validateUpdate(TblUserUpdateRequest request, CommonStatus status) {
         TblUser existsUser = userRepository.findByEmailAndStatus(request.getEmail(), CommonStatus.ACTIVE);
         if (Objects.nonNull(existsUser) && !existsUser.getId().equals(request.getId())) {
-            throw new BusinessException(MessageCode.ERR_01003, messageUtil.getMessage(MessageCode.ERR_01003), "Email: " + request.getEmail() + ", Status: " + CommonStatus.ACTIVE);
+            throw new BusinessException(MessageCode.DUPLICATE, messageUtil.getMessage(MessageCode.DUPLICATE), "Email: " + request.getEmail() + ", Status: " + CommonStatus.ACTIVE);
         }
         if (CommonStatus.ACTIVE.equals(status) && CommonStatus.INACTIVE.equals(status)) {
-            throw new BusinessException(MessageCode.ERR_01004, messageUtil.getMessage(MessageCode.ERR_01004), "Status: " + request.getStatus());
+            throw new BusinessException(MessageCode.ERR_STATUS, messageUtil.getMessage(MessageCode.ERR_STATUS), "Status: " + request.getStatus());
         }
     }
 }

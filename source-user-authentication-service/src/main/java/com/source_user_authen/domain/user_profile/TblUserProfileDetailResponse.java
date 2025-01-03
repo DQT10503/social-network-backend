@@ -1,70 +1,30 @@
-package com.source_user_authen.entity;
+package com.source_user_authen.domain.user_profile;
 
+import com.api.framework.utils.converter.DateTimeJsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.source_user_authen.utils.enummerate.CommonStatus;
-import com.vladmihalcea.hibernate.type.array.ListArrayType;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
-@Entity
-@Table(name = "tbl_user_profile")
-@TypeDef(name = "list-array", typeClass = ListArrayType.class)
-public class TblUserProfile extends BaseEntity implements Serializable {
-    private static final long serialVersionUID = -4879180543150513090L;
-
-    @Id
+public class TblUserProfileDetailResponse {
     private Long id;
-
-    @Column(name = "phone")
-    private String phone;
-
-    @Column(name = "birthday")
+    @JsonSerialize(using = DateTimeJsonSerializer.class)
     private Instant birthday;
-
-    @Column(name = "gender")
-    private Short gender;
-
-    @Column(name = "location")
     private String location;
-
-    @Column(name = "website")
+    private Byte gender;
     private String website;
-
-    @Column(name = "occupation")
     private String occupation;
-
-    @Column(name = "education")
     private String education;
-
-    @Type(type = "list-array")
-    @Column(name = "interests")
     private List<String> interests;
-
-    @Lob
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
     private CommonStatus status;
 
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public Instant getBirthday() {
@@ -75,20 +35,20 @@ public class TblUserProfile extends BaseEntity implements Serializable {
         this.birthday = birthday;
     }
 
-    public Short getGender() {
-        return gender;
-    }
-
-    public void setGender(Short gender) {
-        this.gender = gender;
-    }
-
     public String getLocation() {
         return location;
     }
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Byte getGender() {
+        return gender;
+    }
+
+    public void setGender(Byte gender) {
+        this.gender = gender;
     }
 
     public String getWebsite() {
@@ -131,4 +91,8 @@ public class TblUserProfile extends BaseEntity implements Serializable {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "TblUserProfileDetailResponse [id=" + id + ", birthday=" + birthday + ", location=" + location + ", gender=" + gender + ", website=" + website + ", occupation=" + occupation + ", education=" + education + ", interests=" + interests + ", status=" + status + "]";
+    }
 }

@@ -38,11 +38,11 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         String token = resolveToken(request);
         try {
             if (StringUtils.isNotBlank(token)) {
-                JWSInput input = new JWSInput(token);
-                AccessToken accessToken = input.readJsonContent(AccessToken.class);
+                JWSInput input = new JWSInput(token); // Dùng JWSInput của Keycloak để đọc và giải mã token.
+                AccessToken accessToken = input.readJsonContent(AccessToken.class); // Chuyển payload trong token thành một đối tượng AccessToken.
                 if (Objects.nonNull(accessToken) && !accessToken.isExpired()) {
                     UserDetails userDetail = new User(accessToken.getPreferredUsername(), "xxx", true, true, true, true,
-                            getAuthorities(accessToken.getResourceAccess()));
+                            getAuthorities(accessToken.getResourceAccess())); // Tạo một đối tượng UserDetails với: username, password không cần thiết nên để tạm "xxx", getAuthorities(): lấy role của người dùng.
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(accessToken, null, userDetail.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
