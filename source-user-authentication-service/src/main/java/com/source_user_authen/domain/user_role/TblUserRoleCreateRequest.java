@@ -5,9 +5,11 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotNull;
 
 public class TblUserRoleCreateRequest {
+
     @ApiModelProperty(value = "User id")
     @NotNull
     private Long userId;
+
     @ApiModelProperty(value = "Role id")
     @NotNull
     private Long roleId;

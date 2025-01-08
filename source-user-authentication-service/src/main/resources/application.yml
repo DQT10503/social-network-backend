@@ -1,11 +1,11 @@
 server:
   servlet:
-    context-path: /api/base
+    context-path: /api/user-service/
   port: 6789
 
 keycloak:
   realm: SocialMediaRealm
-  auth-server-url: http://localhost:8080/realms/social-media-realm
+  auth-server-url: http://localhost:8080/
   ssl-required: external
   resource: my-app
   use-resource-role-mappings: true

@@ -5,6 +5,6 @@
     <option name="renamerInitialized" value="true" />
     <option name="snapshotDbValue" value="e34599f8-3dd4-449a-b082-f0844110f8da" />
     <option name="reverseEngineeringLastDbConnectionId" value="e34599f8-3dd4-449a-b082-f0844110f8da__db_social_media_public" />
-    <option name="reLastEntityCreationPackage" value="source-user-authentication-service/src/main/java/com/source_user_authen/entity" />
+    <option name="reLastEntityCreationPackage" value="source-relationship-service/src/main/java/com/source_relationship/entity" />
   </component>
 </project>

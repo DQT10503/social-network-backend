@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOGS" value="${LOG_FOLDER:-./source-base-service/logs}"/>
-    <property name="LOG_FILE_NAME" value="${LOG_FILE_NAME:-source-base-service}"/>
+    <property name="LOGS" value="${LOG_FOLDER:-./source-user-authentication-service/logs}"/>
+    <property name="LOG_FILE_NAME" value="${LOG_FILE_NAME:-source-user-authentication-service}"/>
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">

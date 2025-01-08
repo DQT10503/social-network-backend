@@ -29,7 +29,7 @@ import java.util.List;
 // Đánh dấu đây là cấu hình dành cho Keycloak Adapter
 // Giúp tự động cấu hình các bean cần thiết để tích hợp Keycloak với Spring Security
 @KeycloakConfiguration
-public class    SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
+public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     // TokenProvider: Một lớp quản lý và xử lý các token: như là kiểm tra tính hợp lệ, trích xuất thông tin từ token
     @Autowired
     private TokenProvider tokenProvider;
