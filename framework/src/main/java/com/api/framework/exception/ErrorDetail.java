@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 
+// chỉ bao gồm các field có giá trị != null trong JSON, nếu field nào null thì sẽ không xuất hiện trong response
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorDetail implements Serializable {
     private static final long serialVersionUID = 1L;

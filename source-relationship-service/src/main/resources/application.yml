@@ -4,10 +4,10 @@ server:
   port: 6788
 
 keycloak:
-  realm: SocialMediaRealm
+  realm: SocialNetworkRealm
   auth-server-url: http://localhost:8080/
   ssl-required: external
-  resource: my-app
+  resource: social-network
   use-resource-role-mappings: true
   bearer-only: true
   public-client: true
@@ -22,7 +22,7 @@ spring:
     change-log: classpath:db/changelog/changes/db.changelog-master.xml
     default-schema: service_relationship
   datasource:
-    url: jdbc:postgresql://localhost:5432/db_social_media
+    url: jdbc:postgresql://localhost:5432/db_social_network
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver

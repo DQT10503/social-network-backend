@@ -14,7 +14,7 @@
     <option name="columnNameTemplate" />
     <option name="generateSerialVersionUID" value="true" />
     <option name="isLombokGetterAndSetter" value="false" />
-    <option name="scaffoldingLanguage" value="Java" />
+    <option name="scaffoldingLanguage" />
   </component>
   <component name="ReverseEngineeringSettings">
     <database-infos>

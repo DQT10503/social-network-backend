@@ -12,8 +12,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/framework" />
             <option value="$PROJECT_DIR$/source-content-service" />
+            <option value="$PROJECT_DIR$/source-interaction-service" />
+            <option value="$PROJECT_DIR$/source-message-service" />
+            <option value="$PROJECT_DIR$/source-notification-service" />
             <option value="$PROJECT_DIR$/source-relationship-service" />
-            <option value="$PROJECT_DIR$/source-user-authentication-service" />
+            <option value="$PROJECT_DIR$/source-user-auth-service" />
           </set>
         </option>
       </GradleProjectSettings>

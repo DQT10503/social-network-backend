@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="JpaBuddyIdeaProjectConfig" migrateIndexesAndConstraints="true" reUseTableSchema="true" newRepositoryParent="org.springframework.data.jpa.repository.JpaRepository">
+  <component name="JpaBuddyIdeaProjectConfig" newRepositoryParent="org.springframework.data.jpa.repository.JpaRepository">
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
     <option name="snapshotDbValue" value="e34599f8-3dd4-449a-b082-f0844110f8da" />
-    <option name="reverseEngineeringLastDbConnectionId" value="e34599f8-3dd4-449a-b082-f0844110f8da__db_social_media_public" />
-    <option name="reLastEntityCreationPackage" value="source-relationship-service/src/main/java/com/source_relationship/entity" />
+    <option name="reverseEngineeringLastDbConnectionId" value="75fc97e0-749d-47b0-b118-35df40ac0552__db_fb_clone_service_content_public" />
+    <option name="reLastEntityCreationPackage" value="source-content-service/src/main/java/com/source_content/entity" />
   </component>
 </project>

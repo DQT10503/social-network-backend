@@ -1,8 +1,6 @@
 package com.api.framework.utils;
 
-import com.api.framework.utils.validator.ValidDateTimeBeforeValidator;
-import com.api.framework.utils.validator.ValidTimeBeforeValidator;
-import com.api.framework.utils.validator.ValidValueNumericValidator;
+import com.api.framework.utils.validator.*;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -138,13 +136,6 @@ public @interface Annotations {
         Class<? extends Payload>[] payload() default {};
     }
 
-    @Target(ElementType.FIELD)
-    @Retention(RetentionPolicy.RUNTIME)
-    @Documented
-    public @interface ColumnMapping {
-        String name() default "";
-    }
-
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
@@ -156,6 +147,20 @@ public @interface Annotations {
         String valueOnUpdate() default "";
     }
 
+    @Target({ElementType.FIELD})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Constraint(validatedBy = {EmailValidator.class})
+    @Documented
+    public @interface Email {
+        String message() default "Invalid email";
 
+        int size() default Constants.EMAIL_MAX_LENGTH_DEFAULT;
+
+        String regex() default "";
+
+        Class<?>[] groups() default {};
+
+        Class<? extends Payload>[] payload() default {};
+    }
 
 }

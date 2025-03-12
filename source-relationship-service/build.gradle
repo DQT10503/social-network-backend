@@ -1,5 +1,5 @@
 dependencies {
     implementation project(':framework')
     implementation 'org.apache.poi:poi-ooxml:4.1.0'
-    implementation project(':source-user-authentication-service')
+    implementation project(':source-user-auth-service')
 }

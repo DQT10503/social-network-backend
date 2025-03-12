@@ -1,6 +1,9 @@
-rootProject.name = 'social-media-project'
+rootProject.name = 'social-network-project'
 
 include 'framework'
-include 'source-user-authentication-service'
+include 'source-user-auth-service'
 include 'source-relationship-service'
 include 'source-content-service'
+include 'source-interaction-service'
+include 'source-message-service'
+include 'source-notification-service'
