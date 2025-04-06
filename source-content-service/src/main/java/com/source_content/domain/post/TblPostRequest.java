@@ -1,14 +1,23 @@
-package com.source_content.domain;
+package com.source_content.domain.post;
 
 import com.source_content.utils.enummerate.ContentStatus;
-import com.source_content.utils.enummerate.PrivacyLevel;
 
-public class TblPostCreateRequest {
+import java.util.Map;
+
+public class TblPostRequest {
+    private Long id;
     private Long userId;
     private String content;
-    private PrivacyLevel privacyLevel;
-    private Object location;
+    private String location;
     private ContentStatus status;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getUserId() {
         return userId;
@@ -26,19 +35,11 @@ public class TblPostCreateRequest {
         this.content = content;
     }
 
-    public PrivacyLevel getPrivacyLevel() {
-        return privacyLevel;
-    }
-
-    public void setPrivacyLevel(PrivacyLevel privacyLevel) {
-        this.privacyLevel = privacyLevel;
-    }
-
-    public Object getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Object location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -52,6 +53,6 @@ public class TblPostCreateRequest {
 
     @Override
     public String toString() {
-        return "TblPostCreateRequest [userId=" + userId + ", content=" + content + ", privacyLevel=" + privacyLevel + ", location=" + location + ", status=" + status + "]";
+        return "TblPostRequest [id=" + id + ", userId=" + userId + ", content=" + content + ", location=" + location + ", status=" + status + "]";
     }
 }

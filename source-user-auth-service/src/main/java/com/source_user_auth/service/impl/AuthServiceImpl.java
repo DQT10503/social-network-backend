@@ -23,9 +23,6 @@ import java.util.Random;
 @Service
 @Transactional
 public class AuthServiceImpl implements AuthService {
-
-    @Value("${default.image.url-avatar-user}")
-    private String defaultAvatarUrl;
     private final TblUserRepository userRepository;
     private final TblUserRoleRepository userRoleRepository;
     private final TblRoleRepository roleRepository;
@@ -48,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
         }
         TblUser user = Utilities.copyProperties(request, TblUser.class);
         user.setStatus(AuthStatus.ACTIVE);
-        user.setAvatarUrl(defaultAvatarUrl);
+        user.setAvatarUrl("abc.jpg");
         user.setUsername(generateUsername());
         keyCloakService.createUserInKeycloak(user.getFullName(), user.getEmail(), user.getUsername(), user.getPassword(), user.getPhone());
 //        userRepository.save(user);

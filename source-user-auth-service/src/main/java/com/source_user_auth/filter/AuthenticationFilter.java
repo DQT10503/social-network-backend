@@ -47,6 +47,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     BearerContextHolder.getContext().setMasterAccount(accessToken.getPreferredUsername());
+                    BearerContextHolder.getContext().setToken(token);
                     filterChain.doFilter(request, response);
                 } else {
                     Utilities.buildErrorResponse(response, HttpStatus.UNAUTHORIZED.value() + "", HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase(), token);

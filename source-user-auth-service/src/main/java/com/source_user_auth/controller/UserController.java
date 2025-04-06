@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Lấy danh sách user")
-    @GetMapping("/search")
+    @GetMapping
     public ResponseEntity<PagingResponse> search(TblUserRequest request, PagingRequest pagingRequest) {
         String masterAccount = BearerContextHolder.getContext().getMasterAccount();
         logger.info("{} Search {}", masterAccount, request);

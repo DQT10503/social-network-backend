@@ -6,7 +6,6 @@ server:
 keycloak:
   realm: SocialNetworkRealm
   auth-server-url: http://localhost:8080/
-  ssl-required: external
   resource: social-network
   use-resource-role-mappings: true
   bearer-only: true
@@ -43,8 +42,9 @@ spring:
     multipart:
       max-file-size: 3MB
       max-request-size: 3MB
+cloudinary:
+  cloud-name: dtixovdax
+  api-key: 552782965913599
+  api-secret: kC1ZrevoVZY8egrWU2wptP1fivY
 service-user:
-  base-url: http://localhost:6789/api/user-service
-default:
-  image:
-    url-avatar-user: https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/315373443_877129556799105_6340277356280668501_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=lopTYYMk0j4Q7kNvgF4rhoo&_nc_oc=AdhH8ZuEtRJHeuPQfEyFLjbf2Y5GBp1CxVnV-0tsz2jeYlAeyxQ9WGlCbyx9qhuSGZEaiqm3KSK-80y4-OaGSgeS&_nc_zt=23&_nc_ht=scontent.fhan3-5.fna&_nc_gid=AA8kpH6CVbOUzmiUw5bJO3A&oh=00_AYB6kPaBH1V9e6S5M_jAuhnXqR8xsGTq950YTG8lLbh_mQ&oe=67A41ADE
+  base-url: http://localhost:6789/api/user-service/

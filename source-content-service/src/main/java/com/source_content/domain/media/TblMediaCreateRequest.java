@@ -1,20 +1,23 @@
-package com.source_content.domain;
+package com.source_content.domain.media;
 
 import com.source_content.utils.enummerate.ContentStatus;
+
+import java.util.Map;
 
 public class TblMediaCreateRequest {
     private Long postId;
     private String url;
     private String type;
-    private Object metaData;
-    private ContentStatus status;
+    private Map<String, Object> metaData;
 
-    public TblMediaCreateRequest(Long postId, String url, String type, Object metaData, ContentStatus status) {
+    public TblMediaCreateRequest() {
+    }
+
+    public TblMediaCreateRequest(Long postId, String url, String type, Map<String, Object> metaData) {
         this.postId = postId;
         this.url = url;
         this.type = type;
         this.metaData = metaData;
-        this.status = status;
     }
 
     public Long getPostId() {
@@ -41,19 +44,11 @@ public class TblMediaCreateRequest {
         this.type = type;
     }
 
-    public Object getMetaData() {
+    public Map<String, Object> getMetaData() {
         return metaData;
     }
 
-    public void setMetaData(Object metaData) {
+    public void setMetaData(Map<String, Object> metaData) {
         this.metaData = metaData;
-    }
-
-    public ContentStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ContentStatus status) {
-        this.status = status;
     }
 }

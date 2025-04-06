@@ -1,10 +1,13 @@
 package com.source_content.entity;
 
 import com.source_content.utils.enummerate.ContentStatus;
+import com.vladmihalcea.hibernate.type.json.JsonType;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Map;
 
 @Entity
 @Table(name = "tbl_media")
@@ -20,8 +23,9 @@ public class TblMedia extends BaseEntity implements Serializable {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "meta_data")
-    private Object metaData;
+    @Type(type = "json")
+    @Column(name = "meta_data", columnDefinition = "json")
+    private Map<String, Object> metaData;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -51,11 +55,11 @@ public class TblMedia extends BaseEntity implements Serializable {
         this.type = type;
     }
 
-    public Object getMetaData() {
+    public Map<String, Object> getMetaData() {
         return metaData;
     }
 
-    public void setMetadata(Object metaData) {
+    public void setMetaData(Map<String, Object> metaData) {
         this.metaData = metaData;
     }
 

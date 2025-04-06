@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /api/interaction-service
-  port: 6786
+  port: 6000
 
 keycloak:
   realm: SocialNetworkRealm
@@ -20,9 +20,9 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/changes/db.changelog-master.xml
-    default-schema: service_interaction
+    default-schema: public
   datasource:
-    url: jdbc:postgresql://localhost:5432/db_social_network
+    url: jdbc:postgresql://localhost:5432/db_fb_clone_service_interaction
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -43,3 +43,5 @@ spring:
     multipart:
       max-file-size: 3MB
       max-request-size: 3MB
+service-post:
+  base-url: http://localhost:6787/api/post-service/

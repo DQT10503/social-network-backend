@@ -5,11 +5,12 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="" />
-        <option name="gradleJvm" value="17" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../ProgramData/chocolatey/lib/gradle/tools/gradle-8.13" />
+        <option name="gradleJvm" value="corretto-1.8" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/api-gateway-service" />
             <option value="$PROJECT_DIR$/framework" />
             <option value="$PROJECT_DIR$/source-content-service" />
             <option value="$PROJECT_DIR$/source-interaction-service" />

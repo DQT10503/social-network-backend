@@ -7,3 +7,5 @@ include 'source-content-service'
 include 'source-interaction-service'
 include 'source-message-service'
 include 'source-notification-service'
+include 'api-gateway-service'
+

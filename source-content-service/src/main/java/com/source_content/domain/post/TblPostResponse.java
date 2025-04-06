@@ -1,27 +1,32 @@
-package com.source_content.domain;
+package com.source_content.domain.post;
 
 import com.source_content.utils.enummerate.ContentStatus;
 import com.source_content.utils.enummerate.PrivacyLevel;
 
 public class TblPostResponse {
-    private Long postId;
+    private Long id;
+    private Long userId;
     private String content;
+    private String location;
     private PrivacyLevel privacyLevel;
     private ContentStatus status;
 
-    public TblPostResponse(Long postId, String content, PrivacyLevel privacyLevel, ContentStatus status) {
-        this.postId = postId;
+    public TblPostResponse() {
+    }
+
+    public TblPostResponse(Long id, String content, PrivacyLevel privacyLevel, ContentStatus status) {
+        this.id = id;
         this.content = content;
         this.privacyLevel = privacyLevel;
         this.status = status;
     }
 
-    public Long getPostId() {
-        return postId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getContent() {
@@ -47,4 +52,23 @@ public class TblPostResponse {
     public void setStatus(ContentStatus status) {
         this.status = status;
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+
+
 }

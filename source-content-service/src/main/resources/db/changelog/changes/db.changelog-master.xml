@@ -12,5 +12,6 @@
     <include file="/db/changelog/changes/tables/20250201092500_create_table_album_media.xml"/>
     <include file="/db/changelog/changes/tables/20250201093000_create_table_hashtag.xml"/>
     <include file="/db/changelog/changes/tables/20250201093500_create_table_post_mention.xml"/>
+    <include file="/db/changelog/changes/tables/20250201094000_update_table_post.xml"/>
 
 </databaseChangeLog>

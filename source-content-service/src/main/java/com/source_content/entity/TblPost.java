@@ -1,13 +1,9 @@
 package com.source_content.entity;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.source_content.utils.enummerate.ContentStatus;
 import com.source_content.utils.enummerate.PrivacyLevel;
-import com.vladmihalcea.hibernate.type.json.JsonType;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -25,7 +21,7 @@ public class TblPost extends BaseEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private PrivacyLevel privacyLevel;
 
-    @Column(name = "location", columnDefinition = "json")
+    @Column(name = "location")
     private String location;
 
     @Column(name = "status", nullable = false)
@@ -56,19 +52,19 @@ public class TblPost extends BaseEntity implements Serializable {
         this.privacyLevel = privacyLevel;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public ContentStatus getStatus() {
         return status;
     }
 
     public void setStatus(ContentStatus status) {
         this.status = status;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

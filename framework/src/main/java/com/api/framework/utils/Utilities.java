@@ -64,6 +64,7 @@ public class Utilities {
         try {
             return mapper.readValue(mapper.writeValueAsString(source), clazz);
         } catch (Exception e) {
+            logger.error("Can't copy properties from {} to {}: {}", source.getClass(), clazz.getName(), e.getMessage());
             return null;
         }
     }
@@ -79,7 +80,6 @@ public class Utilities {
             CollectionType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, clazz);
             return mapper.readValue(mapper.writeValueAsString(source), type);
         } catch (Exception e) {
-            logger.warn("Can't copy data: " + e.getMessage());
             return new ArrayList<>();
         }
     }

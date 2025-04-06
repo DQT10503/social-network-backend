@@ -7,14 +7,6 @@ public class UserResponse {
     private String username;
     private String phone;
 
-    public UserResponse(Long id, String fullName, String email, String username, String phone) {
-        this.id = id;
-        this.fullName = fullName;
-        this.email = email;
-        this.username = username;
-        this.phone = phone;
-    }
-
     public Long getId() {
         return id;
     }
