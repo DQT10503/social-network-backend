@@ -19,6 +19,11 @@ public class TblCommentLikeId implements Serializable {
     @Column(name = "comment_id", nullable = false)
     private Long commentId;
 
+    public TblCommentLikeId(Long userId, Long commentId) {
+        this.userId = userId;
+        this.commentId = commentId;
+    }
+
     public Long getUserId() {
         return userId;
     }

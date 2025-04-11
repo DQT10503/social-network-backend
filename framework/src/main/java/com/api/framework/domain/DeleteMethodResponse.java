@@ -3,7 +3,6 @@ package com.api.framework.domain;
 public class DeleteMethodResponse {
     private Long id;
     private Long roleId;
-    private String screenCode;
 
     public Long getId() {
         return id;
@@ -19,13 +18,5 @@ public class DeleteMethodResponse {
 
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
-    }
-
-    public String getScreenCode() {
-        return screenCode;
-    }
-
-    public void setScreenCode(String screenCode) {
-        this.screenCode = screenCode;
     }
 }

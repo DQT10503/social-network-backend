@@ -3,77 +3,95 @@ package com.source_interaction.service.impl;
 import com.api.framework.domain.PagingResponse;
 import com.api.framework.exception.BusinessException;
 import com.api.framework.security.BearerContextHolder;
+import com.api.framework.service.CommonService;
 import com.api.framework.utils.Constants;
 import com.api.framework.utils.MessageUtil;
+import com.api.framework.utils.SimpleQueryBuilder;
 import com.api.framework.utils.Utilities;
+import com.source_interaction.domain.like.TblLikeRequest;
+import com.source_interaction.domain.like.TblLikeResponse;
 import com.source_interaction.domain.post.PostResponse;
-import com.source_interaction.domain.react.TblLikeCreateRequest;
+import com.source_interaction.domain.like.TblLikeCreateRequest;
 import com.source_interaction.domain.user.UserResponse;
 import com.source_interaction.entity.TblLike;
 import com.source_interaction.entity.embedded.TblLikeId;
 import com.source_interaction.repository.*;
-import com.source_interaction.service.InteractionService;
+import com.source_interaction.service.TblLikeService;
 import com.source_interaction.service.retrofit.PostApiService;
 import com.source_interaction.service.retrofit.UserApiService;
-import com.source_interaction.utils.enummerate.ReactionType;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class InteractionServiceImpl implements InteractionService {
+@Service
+@Transactional
+public class TblLikeServiceImpl implements TblLikeService {
 
     private final TblLikeRepository likeRepository;
-    private final TblCommentLikeRepository commentLikeRepository;
-    private final TblCommentRepository commentRepository;
-    private final TblSavedPostRepository savedPostRepository;
-    private final TblShareRepository shareRepository;
     private final PostApiService postApiService;
     private final UserApiService userApiService;
     private final MessageUtil messageUtil;
+    private final CommonService commonService;
 
-    public InteractionServiceImpl(TblLikeRepository likeRepository, TblCommentLikeRepository commentLikeRepository, TblCommentRepository commentRepository, TblSavedPostRepository savedPostRepository, TblShareRepository shareRepository, PostApiService postApiService, UserApiService userApiService, MessageUtil messageUtil) {
+    public TblLikeServiceImpl(TblLikeRepository likeRepository, PostApiService postApiService, UserApiService userApiService, MessageUtil messageUtil, CommonService commonService) {
         this.likeRepository = likeRepository;
-        this.commentLikeRepository = commentLikeRepository;
-        this.commentRepository = commentRepository;
-        this.savedPostRepository = savedPostRepository;
-        this.shareRepository = shareRepository;
         this.postApiService = postApiService;
         this.userApiService = userApiService;
         this.messageUtil = messageUtil;
+        this.commonService = commonService;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public PagingResponse search(TblLikeRequest request, Pageable pageRequest) {
+        StringBuilder whereClause = new StringBuilder("1 = 1");
+        Map<String, Object> params = new HashMap<>();
+        SimpleQueryBuilder simpleQueryBuilder = new SimpleQueryBuilder();
+        whereClause.append(Utilities.buildWhereClause(request, params));
+
+        simpleQueryBuilder.from("tbl_like");
+        simpleQueryBuilder.where(whereClause.toString());
+
+        PagingResponse pagingRs = commonService.executeSearchData(pageRequest, simpleQueryBuilder, params, TblLike.class);
+        List<TblLike> datas = (List<TblLike>) pagingRs.getData();
+        List<TblLikeResponse> caseResponses = Utilities.copyProperties(datas, TblLikeResponse.class);
+        pagingRs.setData(caseResponses);
+        return pagingRs;
     }
 
     @Override
-    public void reactPost(Long postId, TblLikeCreateRequest request) {
-        PostResponse post = getPost(postId);
+    public TblLikeResponse reactPost(Long postId, TblLikeCreateRequest request) {
+        PostResponse post = getPostById(postId);
         UserResponse user = getUser();
         TblLike like = new TblLike();
         like.setId(new TblLikeId(user.getId(), post.getId()));
-        like.setStatus(request.getReactionType());
+        like.setStatus(request.getStatus());
         likeRepository.save(like);
-    }
-
-    @Override
-    public void reactComment(Long commentId, ReactionType reaction) {
-
+        return Utilities.copyProperties(like, TblLikeResponse.class);
     }
 
     @Override
     public void removeReaction(Long postId) {
-
+        PostResponse post = getPostById(postId);
+        UserResponse user = getUser();
+        TblLikeId id = new TblLikeId(user.getId(), post.getId());
+        TblLike like = getLikeById(id);
+        likeRepository.delete(like);
     }
 
-    @Override
-    public void commentPost(Long postId, String content) {
-
+    private TblLike getLikeById(TblLikeId id) {
+        return likeRepository.findById(id).orElseThrow(() -> {
+            throw new BusinessException(Constants.ERR_404, messageUtil.getMessage(Constants.ERR_404), "ID: " + id);
+        });
     }
 
-    @Override
-    public void deleteComment(Long commentId) {
-
-    }
-
-    private PostResponse getPost(Long postId) {
+    protected PostResponse getPostById(Long postId) {
         try {
             Call<PagingResponse> call = postApiService.getPost("Bearer " + BearerContextHolder.getContext().getToken(), postId);
             Response<PagingResponse> response = call.execute();
@@ -88,7 +106,7 @@ public class InteractionServiceImpl implements InteractionService {
         }
     }
 
-    private UserResponse getUser() {
+    protected UserResponse getUser() {
         try {
             Call<PagingResponse> call = userApiService.getUser("Bearer " + BearerContextHolder.getContext().getToken(), BearerContextHolder.getContext().getMasterAccount());
             Response<PagingResponse> response = call.execute();
