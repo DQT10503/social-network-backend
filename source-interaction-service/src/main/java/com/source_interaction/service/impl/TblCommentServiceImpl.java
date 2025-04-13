@@ -9,7 +9,6 @@ import com.source_interaction.domain.comment.*;
 import com.source_interaction.domain.post.PostResponse;
 import com.source_interaction.domain.user.UserResponse;
 import com.source_interaction.entity.TblComment;
-import com.source_interaction.repository.TblCommentLikeRepository;
 import com.source_interaction.repository.TblCommentRepository;
 import com.source_interaction.service.TblCommentService;
 import com.source_interaction.utils.enummerate.InteractionStatus;
@@ -29,14 +28,12 @@ public class TblCommentServiceImpl implements TblCommentService {
     private final CommonService commonService;
     private final MessageUtil messageUtil;
     private final TblCommentRepository commentRepository;
-    private final TblCommentLikeRepository commentLikeRepository;
     private final TblLikeServiceImpl likeServiceImpl;
 
-    public TblCommentServiceImpl(CommonService commonService, MessageUtil messageUtil, TblCommentRepository commentRepository, TblCommentLikeRepository commentLikeRepository, TblLikeServiceImpl likeServiceImpl) {
+    public TblCommentServiceImpl(CommonService commonService, MessageUtil messageUtil, TblCommentRepository commentRepository, TblLikeServiceImpl likeServiceImpl) {
         this.commonService = commonService;
         this.messageUtil = messageUtil;
         this.commentRepository = commentRepository;
-        this.commentLikeRepository = commentLikeRepository;
         this.likeServiceImpl = likeServiceImpl;
     }
 

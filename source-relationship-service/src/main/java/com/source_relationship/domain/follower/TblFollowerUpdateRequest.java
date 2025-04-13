@@ -1,5 +1,6 @@
 package com.source_relationship.domain.follower;
 
+import com.source_relationship.utils.enumerate.CommonStatus;
 import com.source_user_auth.utils.enummerate.CommonStatus;
 import io.swagger.annotations.ApiModelProperty;
 
