@@ -19,7 +19,13 @@ public class TblLikeId implements Serializable {
     @Column(name = "post_id", nullable = false)
     private Long postId;
 
-    public TblLikeId(Long id, Long postId) {
+    public TblLikeId() {
+
+    }
+
+    public TblLikeId(Long userId, Long postId) {
+        this.userId = userId;
+        this.postId = postId;
     }
 
     public Long getUserId() {

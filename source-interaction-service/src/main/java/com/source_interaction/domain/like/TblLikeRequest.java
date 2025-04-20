@@ -10,9 +10,9 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class TblLikeRequest {
     @ApiModelProperty(value = "ID")
-    TblLikeId id;
+    private TblLikeId id;
     @ApiModelProperty(value = "Trạng thái")
-    ReactionType status;
+    private ReactionType status;
 
     public TblLikeId getId() {
         return id;

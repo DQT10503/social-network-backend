@@ -106,8 +106,6 @@ public class TblCommentServiceImpl implements TblCommentService {
     }
 
     private TblComment getCommentById(Long id) {
-        return commentRepository.findById(id).orElseThrow(() -> {
-            throw new BusinessException(Constants.ERR_404, messageUtil.getMessage(Constants.ERR_404), "Comment ID: " + id);
-        });
+        return commentRepository.findById(id).orElseThrow(() ->new BusinessException(Constants.ERR_404, messageUtil.getMessage(Constants.ERR_404), "Comment ID: " + id));
     }
 }

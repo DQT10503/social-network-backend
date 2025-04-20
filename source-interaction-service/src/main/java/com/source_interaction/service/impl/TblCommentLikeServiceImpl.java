@@ -73,8 +73,7 @@ public class TblCommentLikeServiceImpl implements TblCommentLikeService {
     }
 
     private TblCommentLike getCommentLikeById(TblCommentLikeId id) {
-        return commentLikeRepository.findById(id).orElseThrow(() -> {
-            throw new BusinessException(Constants.ERR_404, messageUtil.getMessage(Constants.ERR_404), "CommentLike ID: " + id);
-        });
+        return commentLikeRepository.findById(id).orElseThrow(() ->
+                new BusinessException(Constants.ERR_404, messageUtil.getMessage(Constants.ERR_404), "CommentLike ID: " + id));
     }
 }

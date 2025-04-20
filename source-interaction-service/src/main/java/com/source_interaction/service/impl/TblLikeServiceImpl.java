@@ -4,10 +4,7 @@ import com.api.framework.domain.PagingResponse;
 import com.api.framework.exception.BusinessException;
 import com.api.framework.security.BearerContextHolder;
 import com.api.framework.service.CommonService;
-import com.api.framework.utils.Constants;
-import com.api.framework.utils.MessageUtil;
-import com.api.framework.utils.SimpleQueryBuilder;
-import com.api.framework.utils.Utilities;
+import com.api.framework.utils.*;
 import com.source_interaction.domain.like.TblLikeRequest;
 import com.source_interaction.domain.like.TblLikeResponse;
 import com.source_interaction.domain.post.PostResponse;
@@ -15,11 +12,15 @@ import com.source_interaction.domain.like.TblLikeCreateRequest;
 import com.source_interaction.domain.user.UserResponse;
 import com.source_interaction.entity.TblLike;
 import com.source_interaction.entity.embedded.TblLikeId;
+import com.source_interaction.domain.event.ReactionEventDTO;
 import com.source_interaction.repository.*;
 import com.source_interaction.service.TblLikeService;
 import com.source_interaction.service.retrofit.PostApiService;
 import com.source_interaction.service.retrofit.UserApiService;
+import com.source_interaction.utils.enummerate.ReactionTargetType;
+import com.source_interaction.utils.topic.KafkaTopics;
 import org.springframework.data.domain.Pageable;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
@@ -38,13 +39,15 @@ public class TblLikeServiceImpl implements TblLikeService {
     private final UserApiService userApiService;
     private final MessageUtil messageUtil;
     private final CommonService commonService;
+    private final KafkaTemplate<String, ReactionEventDTO> kafkaTemplate;
 
-    public TblLikeServiceImpl(TblLikeRepository likeRepository, PostApiService postApiService, UserApiService userApiService, MessageUtil messageUtil, CommonService commonService) {
+    public TblLikeServiceImpl(TblLikeRepository likeRepository, PostApiService postApiService, UserApiService userApiService, MessageUtil messageUtil, CommonService commonService, KafkaTemplate<String, ReactionEventDTO> kafkaTemplate) {
         this.likeRepository = likeRepository;
         this.postApiService = postApiService;
         this.userApiService = userApiService;
         this.messageUtil = messageUtil;
         this.commonService = commonService;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     @SuppressWarnings("unchecked")
@@ -73,6 +76,10 @@ public class TblLikeServiceImpl implements TblLikeService {
         like.setId(new TblLikeId(user.getId(), post.getId()));
         like.setStatus(request.getStatus());
         likeRepository.save(like);
+
+        ReactionEventDTO event = new ReactionEventDTO(ReactionTargetType.REACT_POST, user.getId(), post.getId(), like.getStatus());
+        kafkaTemplate.send("react-topic", user.getId().toString(), event);
+        System.out.println("Sent...");
         return Utilities.copyProperties(like, TblLikeResponse.class);
     }
 
@@ -86,9 +93,8 @@ public class TblLikeServiceImpl implements TblLikeService {
     }
 
     private TblLike getLikeById(TblLikeId id) {
-        return likeRepository.findById(id).orElseThrow(() -> {
-            throw new BusinessException(Constants.ERR_404, messageUtil.getMessage(Constants.ERR_404), "ID: " + id);
-        });
+        return likeRepository.findById(id).orElseThrow(() ->
+                new BusinessException(Constants.ERR_404, messageUtil.getMessage(Constants.ERR_404), "ID: " + id));
     }
 
     protected PostResponse getPostById(Long postId) {

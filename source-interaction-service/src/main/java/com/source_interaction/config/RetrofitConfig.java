@@ -10,9 +10,9 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 @Configuration
 public class RetrofitConfig {
-    @Value("${post-service.base-url}")
+    @Value("${service-post.base-url}")
     private String baseUrlPost;
-    @Value("${user-service.base-url}")
+    @Value("${service-user.base-url}")
     private String baseUrlUser;
 
     @Bean

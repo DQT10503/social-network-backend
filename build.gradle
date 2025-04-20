@@ -1,4 +1,6 @@
+// Khối buildscript định nghĩa các tài nguyên và cấu hình cần thiết để Gradle thực thi quá trình build dự án
 buildscript {
+    // Repositories: Các kho lưu trữ nơi Gradle tìm kiếm các plugin và thư viện
     repositories {
         mavenLocal()
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
@@ -6,6 +8,7 @@ buildscript {
         maven { url 'https://repo.spring.io/plugins-release' }
         maven { url "https://plugins.gradle.org/m2/" }
     }
+    // Ext: Các biến (properties) dùng để quản lý phiên bản của các thư viện.
     ext {
         springCloudVersion = 'Finchley.RELEASE'
         springBootVersion = '2.4.4'
@@ -13,6 +16,7 @@ buildscript {
         lombokVersion = '1.18.4'
         keycloakVersion = '19.0.1'
     }
+    // Dependencies: Các plugin Gradle cần để hỗ trợ quá trình build.
     dependencies {
         classpath "io.spring.gradle:dependency-management-plugin:${springManagementVersion}"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
@@ -93,10 +97,10 @@ subprojects {
 //        implementation 'org.springframework.data:spring-data-redis'
 //        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
-        // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate5
         implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.13.3'
-        // https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http44
         implementation group: 'com.cloudinary', name: 'cloudinary-http44', version: '1.39.0'
+        // spring kafka
+        implementation 'org.springframework.kafka:spring-kafka'
 
         implementation 'org.liquibase:liquibase-core:4.29.0'
 
