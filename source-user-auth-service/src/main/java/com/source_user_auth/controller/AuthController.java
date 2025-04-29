@@ -5,6 +5,7 @@ import com.source_user_auth.domain.auth.RegisterRequest;
 import com.source_user_auth.domain.auth.RegisterResponse;
 import com.source_user_auth.service.AuthService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Api(description = "Module Authenticate")
 @RestController
@@ -27,8 +29,9 @@ public class AuthController {
         this.authService = authService;
     }
 
+    @ApiOperation(value = "Đăng ký tài khoản")
     @PostMapping("/sign-up")
-    public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest request) {
+    public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest request) throws IOException {
         String masterAccount = BearerContextHolder.getContext().getMasterAccount();
         logger.info("{} [Register] {}", masterAccount, request);
         return ResponseEntity.ok(authService.register(request));

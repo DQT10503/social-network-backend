@@ -37,9 +37,10 @@ public class TblCommentServiceImpl implements TblCommentService {
         this.likeServiceImpl = likeServiceImpl;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public PagingResponse search(TblCommentRequest request, Pageable pageRequest) {
-        StringBuilder whereClause = new StringBuilder();
+        StringBuilder whereClause = new StringBuilder("1 = 1");
         Map<String, Object> params = new HashMap<>();
         SimpleQueryBuilder simpleQueryBuilder = new SimpleQueryBuilder(" "
                 + " WITH RECURSIVE comment_hierarchy AS ("
@@ -56,6 +57,7 @@ public class TblCommentServiceImpl implements TblCommentService {
         whereClause.append(Utilities.buildWhereClause(request, params));
 
         simpleQueryBuilder.from("tbl_comment");
+        simpleQueryBuilder.where(whereClause.toString());
         simpleQueryBuilder.orderBy("path", Sort.Direction.ASC);
 
         PagingResponse pagingRs = commonService.executeSearchData(pageRequest, simpleQueryBuilder, params, TblComment.class);

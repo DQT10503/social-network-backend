@@ -16,11 +16,15 @@ import com.source_interaction.entity.embedded.TblCommentLikeId;
 import com.source_interaction.repository.TblCommentLikeRepository;
 import com.source_interaction.service.TblCommentLikeService;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
+@Transactional
 public class TblCommentLikeServiceImpl implements TblCommentLikeService {
     private final TblCommentLikeRepository commentLikeRepository;
     private final CommonService commonService;
@@ -32,6 +36,7 @@ public class TblCommentLikeServiceImpl implements TblCommentLikeService {
         this.messageUtil = messageUtil;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public PagingResponse search(TblCommentLikeRequest request, Pageable pageRequest) {
         StringBuilder whereClause = new StringBuilder("1 = 1");
@@ -39,8 +44,8 @@ public class TblCommentLikeServiceImpl implements TblCommentLikeService {
         SimpleQueryBuilder simpleQueryBuilder = new SimpleQueryBuilder();
         whereClause.append(Utilities.buildWhereClause(request, params));
 
-        simpleQueryBuilder.where(whereClause.toString());
         simpleQueryBuilder.from("tbl_comment_like");
+        simpleQueryBuilder.where(whereClause.toString());
 
         PagingResponse pagingRs = commonService.executeSearchData(pageRequest, simpleQueryBuilder, params, TblCommentLike.class);
         List<TblCommentLike> datas = (List<TblCommentLike>) pagingRs.getData();

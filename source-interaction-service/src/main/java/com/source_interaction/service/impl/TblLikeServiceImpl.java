@@ -7,6 +7,7 @@ import com.api.framework.service.CommonService;
 import com.api.framework.utils.*;
 import com.source_interaction.domain.like.TblLikeRequest;
 import com.source_interaction.domain.like.TblLikeResponse;
+import com.source_interaction.domain.like.TblLikeUpdateRequest;
 import com.source_interaction.domain.post.PostResponse;
 import com.source_interaction.domain.like.TblLikeCreateRequest;
 import com.source_interaction.domain.user.UserResponse;
@@ -69,7 +70,7 @@ public class TblLikeServiceImpl implements TblLikeService {
     }
 
     @Override
-    public TblLikeResponse reactPost(Long postId, TblLikeCreateRequest request) {
+    public TblLikeResponse insert(Long postId, TblLikeCreateRequest request) {
         PostResponse post = getPostById(postId);
         UserResponse user = getUser();
         TblLike like = new TblLike();
@@ -79,12 +80,22 @@ public class TblLikeServiceImpl implements TblLikeService {
 
         ReactionEventDTO event = new ReactionEventDTO(ReactionTargetType.REACT_POST, user.getId(), post.getId(), like.getStatus());
         kafkaTemplate.send("react-topic", user.getId().toString(), event);
-        System.out.println("Sent...");
         return Utilities.copyProperties(like, TblLikeResponse.class);
     }
 
     @Override
-    public void removeReaction(Long postId) {
+    public TblLikeResponse update(TblLikeUpdateRequest request) {
+        PostResponse post = getPostById(request.getPostId());
+        UserResponse user = getUser();
+        TblLikeId id = new TblLikeId(post.getId(), user.getId());
+        TblLike like = getLikeById(id);
+        Utilities.updateProperties(request, like);
+        likeRepository.save(like);
+        return Utilities.copyProperties(like, TblLikeResponse.class);
+    }
+
+    @Override
+    public void delete(Long postId) {
         PostResponse post = getPostById(postId);
         UserResponse user = getUser();
         TblLikeId id = new TblLikeId(user.getId(), post.getId());
@@ -97,6 +108,7 @@ public class TblLikeServiceImpl implements TblLikeService {
                 new BusinessException(Constants.ERR_404, messageUtil.getMessage(Constants.ERR_404), "ID: " + id));
     }
 
+    @SuppressWarnings("unchecked")
     protected PostResponse getPostById(Long postId) {
         try {
             Call<PagingResponse> call = postApiService.getPost("Bearer " + BearerContextHolder.getContext().getToken(), postId);
@@ -112,6 +124,7 @@ public class TblLikeServiceImpl implements TblLikeService {
         }
     }
 
+    @SuppressWarnings("unchecked")
     protected UserResponse getUser() {
         try {
             Call<PagingResponse> call = userApiService.getUser("Bearer " + BearerContextHolder.getContext().getToken(), BearerContextHolder.getContext().getMasterAccount());
