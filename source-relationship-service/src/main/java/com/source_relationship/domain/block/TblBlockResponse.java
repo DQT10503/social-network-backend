@@ -1,11 +1,11 @@
 package com.source_relationship.domain.block;
 
-import com.source_relationship.utils.enumerate.CommonStatus;
+import com.source_relationship.utils.enumerate.RelationshipStatus;
 
 public class TblBlockResponse {
     private Long blockerId;
     private Long blockedId;
-    private CommonStatus status;
+    private RelationshipStatus status;
 
     public Long getBlockerId() {
         return blockerId;
@@ -23,11 +23,11 @@ public class TblBlockResponse {
         this.blockedId = blockedId;
     }
 
-    public CommonStatus getStatus() {
+    public RelationshipStatus getStatus() {
         return status;
     }
 
-    public void setStatus(CommonStatus status) {
+    public void setStatus(RelationshipStatus status) {
         this.status = status;
     }
 

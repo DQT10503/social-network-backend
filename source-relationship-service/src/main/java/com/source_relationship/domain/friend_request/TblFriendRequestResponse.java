@@ -1,12 +1,12 @@
 package com.source_relationship.domain.friend_request;
 
-import com.source_relationship.utils.enumerate.CommonStatus;
+import com.source_relationship.utils.enumerate.RelationshipStatus;
 
 public class TblFriendRequestResponse {
 
     private Long senderId;
     private Long receiverId;
-    private CommonStatus status;
+    private RelationshipStatus status;
 
     public Long getSenderId() {
         return senderId;
@@ -24,11 +24,11 @@ public class TblFriendRequestResponse {
         this.receiverId = receiverId;
     }
 
-    public CommonStatus getStatus() {
+    public RelationshipStatus getStatus() {
         return status;
     }
 
-    public void setStatus(CommonStatus status) {
+    public void setStatus(RelationshipStatus status) {
         this.status = status;
     }
 

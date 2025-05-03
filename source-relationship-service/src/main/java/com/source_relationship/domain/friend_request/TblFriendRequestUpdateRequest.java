@@ -1,6 +1,6 @@
 package com.source_relationship.domain.friend_request;
 
-import com.source_relationship.utils.enumerate.CommonStatus;
+import com.source_relationship.utils.enumerate.RelationshipStatus;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotNull;
 
@@ -8,13 +8,13 @@ public class TblFriendRequestUpdateRequest extends TblFriendRequestCreateRequest
 
     @ApiModelProperty(value = "Trạng thái")
     @NotNull
-    CommonStatus status;
+    RelationshipStatus status;
 
-    public CommonStatus getStatus() {
+    public RelationshipStatus getStatus() {
         return status;
     }
 
-    public void setStatus(CommonStatus status) {
+    public void setStatus(RelationshipStatus status) {
         this.status = status;
     }
 

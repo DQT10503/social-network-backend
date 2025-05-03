@@ -13,7 +13,7 @@ import com.source_relationship.entity.TblFriendRequest;
 import com.source_relationship.entity.embedded.TblFriendRequestId;
 import com.source_relationship.repository.TblFriendRequestRepository;
 import com.source_relationship.service.TblFriendRequestService;
-import com.source_relationship.utils.enumerate.CommonStatus;
+import com.source_relationship.utils.enumerate.RelationshipStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +34,7 @@ public class TblFriendRequestServiceImpl implements TblFriendRequestService {
     @Override
     public TblFriendRequestResponse insert(TblFriendRequestCreateRequest request) {
         TblFriendRequest friendRequest = Utilities.copyProperties(request, TblFriendRequest.class);
-        friendRequest.setStatus(CommonStatus.ACTIVE);
+        friendRequest.setStatus(RelationshipStatus.ACTIVE);
         friendRequestRepository.save(friendRequest);
         return Utilities.copyProperties(friendRequest, TblFriendRequestResponse.class);
     }

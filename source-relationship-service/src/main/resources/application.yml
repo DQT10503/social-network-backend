@@ -20,9 +20,9 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/changes/db.changelog-master.xml
-    default-schema: service_relationship
+    default-schema: public
   datasource:
-    url: jdbc:postgresql://localhost:5432/db_social_network
+    url: jdbc:postgresql://localhost:5432/db_fb_clone_service_relationship
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver

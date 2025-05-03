@@ -1,11 +1,11 @@
 package com.source_relationship.domain.follower;
 
-import com.source_relationship.utils.enumerate.CommonStatus;
+import com.source_relationship.utils.enumerate.RelationshipStatus;
 
 public class TblFollowerResponse {
     private Long followerId;
     private Long followedId;
-    private CommonStatus status;
+    private RelationshipStatus status;
 
     public Long getFollowerId() {
         return followerId;
@@ -23,11 +23,11 @@ public class TblFollowerResponse {
         this.followedId = followedId;
     }
 
-    public CommonStatus getStatus() {
+    public RelationshipStatus getStatus() {
         return status;
     }
 
-    public void setStatus(CommonStatus status) {
+    public void setStatus(RelationshipStatus status) {
         this.status = status;
     }
 

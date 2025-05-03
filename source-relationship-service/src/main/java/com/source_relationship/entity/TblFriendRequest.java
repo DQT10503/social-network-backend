@@ -1,7 +1,7 @@
 package com.source_relationship.entity;
 
 import com.source_relationship.entity.embedded.TblFriendRequestId;
-import com.source_relationship.utils.enumerate.CommonStatus;
+import com.source_relationship.utils.enumerate.RelationshipStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,7 +15,7 @@ public class TblFriendRequest extends BaseEntity implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private CommonStatus status;
+    private RelationshipStatus status;
 
     public TblFriendRequestId getId() {
         return id;
@@ -25,11 +25,11 @@ public class TblFriendRequest extends BaseEntity implements Serializable {
         this.id = id;
     }
 
-    public CommonStatus getStatus() {
+    public RelationshipStatus getStatus() {
         return status;
     }
 
-    public void setStatus(CommonStatus status) {
+    public void setStatus(RelationshipStatus status) {
         this.status = status;
     }
 

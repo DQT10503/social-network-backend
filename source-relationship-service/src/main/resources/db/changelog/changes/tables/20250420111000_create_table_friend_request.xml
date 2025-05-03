@@ -5,9 +5,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
-    <changeSet id="20250105231000_create_table_friend_request" author="thinhdq">
+    <changeSet id="20250420111000_create_table_friend_request" author="thinhdq">
         <sql>
-            CREATE TABLE IF NOT EXISTS service_relationship.tbl_friend_request (
+            CREATE TABLE IF NOT EXISTS public.tbl_friend_request (
                 sender_id bigint NOT NULL,
                 receiver_id bigint NOT NULL,
                 created_at timestamp without time zone,
@@ -20,7 +20,7 @@
 
                 TABLESPACE pg_default;
 
-            ALTER TABLE IF EXISTS service_relationship.tbl_friend_request OWNER to postgres;
+            ALTER TABLE IF EXISTS public.tbl_friend_request OWNER to postgres;
         </sql>
     </changeSet>
 </databaseChangeLog>

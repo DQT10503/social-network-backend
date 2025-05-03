@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-@ComponentScan(basePackages = {"com.api.framework", "com.source_user_auth","com.source_relationship"})
+@ComponentScan(basePackages = {"com.api.framework", "com.source_relationship"})
 public class SourceRelationshipServiceApplication {
 
     public static void main(String[] args) {

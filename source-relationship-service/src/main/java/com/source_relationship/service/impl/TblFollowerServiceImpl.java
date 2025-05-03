@@ -13,7 +13,7 @@ import com.source_relationship.entity.TblFollower;
 import com.source_relationship.entity.embedded.TblFollowerId;
 import com.source_relationship.repository.TblFollowerRepository;
 import com.source_relationship.service.TblFollowerService;
-import com.source_relationship.utils.enumerate.CommonStatus;
+import com.source_relationship.utils.enumerate.RelationshipStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +28,7 @@ public class TblFollowerServiceImpl implements TblFollowerService {
     @Override
     public TblFollowerResponse insert(TblFollowerCreateRequest request) {
         TblFollower follower = Utilities.copyProperties(request, TblFollower.class);
-        follower.setStatus(CommonStatus.ACTIVE);
+        follower.setStatus(RelationshipStatus.ACTIVE);
         followerRepository.save(follower);
         return Utilities.copyProperties(follower, TblFollowerResponse.class);
     }

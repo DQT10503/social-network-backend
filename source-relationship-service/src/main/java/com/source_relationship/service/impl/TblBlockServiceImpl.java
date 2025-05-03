@@ -13,7 +13,7 @@ import com.source_relationship.entity.TblBlock;
 import com.source_relationship.entity.embedded.TblBlockId;
 import com.source_relationship.repository.TblBlockRepository;
 import com.source_relationship.service.TblBlockService;
-import com.source_relationship.utils.enumerate.CommonStatus;
+import com.source_relationship.utils.enumerate.RelationshipStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +34,7 @@ public class TblBlockServiceImpl implements TblBlockService {
     @Override
     public TblBlockResponse insert(TblBlockCreateRequest request) {
         TblBlock block = Utilities.copyProperties(request, TblBlock.class);
-        block.setStatus(CommonStatus.ACTIVE);
+        block.setStatus(RelationshipStatus.ACTIVE);
         return Utilities.copyProperties(block, TblBlockResponse.class);
     }
 
@@ -51,9 +51,8 @@ public class TblBlockServiceImpl implements TblBlockService {
         TblBlock block = getBlockById(blockerId, blockedId);
         blockRepository.delete(block);
         DeleteMethodResponse response = new DeleteMethodResponse();
-        TblBlockId blockId = new TblBlockId(blockerId, blockedId);
         response.setId(blockerId);
-        return null;
+        return response;
     }
 
     private TblBlock getBlockById(Long blockerId, Long blockedId) {
